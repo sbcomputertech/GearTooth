@@ -19,3 +19,6 @@ FYI: users can extract the gtil code from a linked runtime, so you might want to
 #### ChainLink - TODO
 ChainLink is the solution used to link the GearTooth runtime in with the gtil code at compile time, and is easily extensible using a `link.cl` file.
 This allows you to specify information like the version of GearTooth to pack and certain backend libraries and/or APIs to use.
+
+### Credits
+- [python-minifier](https://github.com/dflook/python-minifier) - @dflook
