@@ -1,3 +1,3 @@
 
 def run(inp: str):
-    return inp.replace("\n", "\n"*500)
+    return inp.replace("0", "@o\"''''")
