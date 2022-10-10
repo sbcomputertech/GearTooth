@@ -1,3 +1,6 @@
+addlib stdlib
 program start hw
-native print("hello world")
+native print("hello native keyword")
+define testfn print("i can define functions!")
+call testfn
 program end
