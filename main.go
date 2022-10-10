@@ -9,6 +9,9 @@ import (
 	"strings"
 )
 
+var currentprog string
+var inprog bool
+
 func main() {
 	switch os.Args[1] {
 	case "compile":
@@ -38,13 +41,17 @@ func runcompiler() {
 		tokenize(code_lines[i])
 	}
 
-	cmd := exec.Command("python", "pyil/transform.py", "main.gtil.pre", "main.gtil")
+	fmt.Println("CP: " + currentprog)
+
+	il_filename := currentprog + ".gtil"
+
+	cmd := exec.Command("python", "pyil/transform.py", il_filename+".pre", il_filename)
 	cmd.Run()
 
-	os.Remove("main.gtil.pre")
+	os.Remove(il_filename + ".pre")
 }
 
-func tokenize(inLine string) string {
+func tokenize(inLine string) {
 	splitLine := strings.Split(inLine, " ")
 
 	switch splitLine[0] {
@@ -53,8 +60,6 @@ func tokenize(inLine string) string {
 	case "native":
 		kw_native(splitLine[1:])
 	}
-
-	return "todo"
 }
 
 func err_syntax(msg string, line int, msgargs ...any) {
@@ -66,8 +71,15 @@ func err_syntax(msg string, line int, msgargs ...any) {
 func kw_program(args []string) {
 	if args[0] == "end" {
 		fmt.Println("found program end")
+		inprog = false
 	} else if args[0] == "start" {
+		if inprog {
+			err_syntax("Defined new program before current program ended", -1)
+			return
+		}
 		fmt.Println("defined program " + args[1])
+		currentprog = args[1]
+		inprog = true
 	} else {
 		err_syntax("Unexpected token '%s'", -1, args[0])
 	}
@@ -85,5 +97,5 @@ func showabout() {
 }
 
 func add_il(il string) {
-	os.WriteFile("main.gtil.pre", []byte(il), fs.ModeAppend)
+	os.WriteFile(currentprog+".gtil.pre", []byte(il), fs.ModeAppend)
 }

@@ -16,3 +16,7 @@
 
 # Python-related folders
 __pycache__
+
+# GearTooth files
+*.gtil
+*.gtil.pre
