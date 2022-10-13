@@ -1,4 +1,4 @@
-package main
+package geartoothc
 
 func replaceAtIndex(in string, r rune, i int) string {
 	out := []rune(in)
