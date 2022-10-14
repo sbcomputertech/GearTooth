@@ -6,11 +6,11 @@ del /Q .\bin\*
 echo ---=== Building all GearTooth components ===---
 
 cd geartoothc
-go build -o gtc.exe
+go build -buildmode=exe -o gtc.exe
 copy gtc.exe ..\bin\gtc.exe
 cd ..
 
 cd geartoothpre
-go build -o gtpp.exe
+go build -buildmode=exe -o gtpp.exe
 copy gtpp.exe ..\bin\gtpp.exe
 cd ..

@@ -1,4 +1,4 @@
-package geartoothc
+package main
 
 import (
 	"fmt"
